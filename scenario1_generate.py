@@ -3,11 +3,11 @@ import random
 import json
 
 # configuration
-DataBase_Name = "message1234.db"
+DataBase_Name = "senario1_generate.py"
 Log_Name = "senario1_deleted_reference_data.json"
 
 # 1. Connect to SQLite 
-conn = sqlite3.connect("messages1234.db")
+conn = sqlite3.connect("senario1.db")
 cursor = conn.cursor()
 
 # 2. Drop the old table if it exists so we always start fresh
@@ -58,15 +58,15 @@ cursor.execute("SELECT id, sender, content, timestamp FROM messages WHERE id BET
 deleted_record = cursor.fetchall()
 
 # Export the ground truth that was deleted to JSON to be compared/verify against carver
-ground_truth_data = [
+ground_truth_data_senario1 = [
     {"id": r[0], "sender": r[1], "content": r[2], "timestamp": r[3]}
     for r in deleted_record
 ]
 
 with open (Log_Name, "w") as f:
-    json.dump(ground_truth_data, f, indent=4)
+    json.dump(ground_truth_data_senario1, f, indent=4)
 
-print(f"Logged {len(ground_truth_data)} target records to {Log_Name}")
+print(f"Logged {len(ground_truth_data_senario1)} target records to {Log_Name}")
 
 # perform soft deletion
 cursor.execute("DELETE FROM messages WHERE id BETWEEN 200 AND 400;")
