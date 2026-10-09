@@ -49,7 +49,7 @@ cursor.executemany("""
 
 # 7. Commit changes
 conn.commit()
-print("Successfully created messages1234.db and added 1500 generated messages.")
+print("Successfully created senario1.db and added 1500 generated messages.")
 
 # SENARIO 1 DELETION : deleting a specific range like IDs 200 to 400)
 # get all records from before deletion to get a reference point (ground truth)
